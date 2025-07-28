@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS localidad;
 CREATE TABLE localidad (
     id_localidad INT PRIMARY KEY AUTO_INCREMENT,
     nombre_localidad VARCHAR(200) NOT NULL,
-    codigo_postal varchar(8),
+    codigo_postal varchar(8) NOT NULL,
     id_provincia INT NOT NULL
 );
 
@@ -29,14 +29,14 @@ CREATE TABLE profesor (
     id_profesor INT PRIMARY KEY AUTO_INCREMENT,
     nombre_profesor VARCHAR(100) NOT NULL,
     apellido_profesor VARCHAR(100) NOT NULL,
-    especialidad VARCHAR(100)    
+    especialidad VARCHAR(100) NOT NULL    
 );
 
 DROP TABLE IF EXISTS maquinaoelemento;
 CREATE TABLE maquinaoelemento (
     id_elemento INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    tipo VARCHAR(50)
+    tipo VARCHAR(50) NOT NULL
 );
 
 DROP TABLE IF EXISTS alumno;
@@ -46,10 +46,10 @@ CREATE TABLE alumno (
     apellido_alumno VARCHAR(100) NOT NULL,
     dni VARCHAR(20) UNIQUE NOT NULL,
     email VARCHAR(100),
-    fecha_nac DATE,
+    fecha_nac DATE NOT NULL,
     telefono VARCHAR(20),
-    domicilio VARCHAR(150),
-    id_localidad INT
+    domicilio VARCHAR(150) NOT NULL,
+    id_localidad INT NOT NULL
 );
 
 DROP TABLE IF EXISTS plan;
@@ -57,7 +57,7 @@ CREATE TABLE plan (
     id_plan INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
-    cantidad_dias_semana INT NOT NULL
+    cantidad_dias_semana TINYINT NOT NULL
 );
 
 DROP TABLE IF EXISTS pago;
@@ -73,7 +73,7 @@ DROP TABLE IF EXISTS forma_de_pago;
 CREATE TABLE forma_de_pago (
     id_forma_pago INT PRIMARY KEY AUTO_INCREMENT,
     descripcion VARCHAR(100) NOT NULL,
-    tipo enum('Efectivo', 'Tarjeta Credito', 'Tarjeta Débito', 'Transferencia','Otros')
+    tipo enum('Efectivo', 'Tarjeta Credito', 'Tarjeta Débito', 'Transferencia','Otros') NOT NULL
 );
 
 DROP TABLE IF EXISTS plan_alumno;
@@ -99,12 +99,12 @@ CREATE TABLE rutina_alumno (
     id_rutina_alumno INT PRIMARY KEY AUTO_INCREMENT,
     id_alumno INT NOT NULL,
     id_ejercicio INT NOT NULL,
-    dia_semana enum ('Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'),
+    dia_semana enum ('Lunes','Martes','Miercoles','Jueves','Viernes','Sabado') NOT NULL,
     id_profesor INT NOT NULL,
-    orden INT,
-    repeticiones INT,
-    series INT,
-    peso DOUBLE,
+    orden TINYINT NOT NULL,
+    repeticiones TINYINT NOT NULL,
+    series TINYINT NOT NULL,
+    peso DECIMAL(5,2) NOT NULL,
     fecha_baja DATE    
 );
 
@@ -121,8 +121,7 @@ ALTER TABLE localidad
 
 ALTER TABLE alumno    
     ADD CONSTRAINT fk_alumno_localidad
-    FOREIGN KEY (id_localidad) REFERENCES localidad(id_localidad)
-    ON DELETE SET NULL ON UPDATE CASCADE;
+    FOREIGN KEY (id_localidad) REFERENCES localidad(id_localidad);
 
 ALTER TABLE pago
     ADD CONSTRAINT fk_pago_forma_de_pago
@@ -157,3 +156,14 @@ ALTER TABLE rutina_alumno
 	ADD CONSTRAINT fk_rutina_alumno_profesor
     FOREIGN KEY (id_profesor) REFERENCES profesor(id_profesor)
     ON DELETE CASCADE ON UPDATE CASCADE;
+
+    
+-- ------------
+-- Índices ---
+-- ------------
+ALTER TABLE alumno ADD INDEX idx_Apellido (apellido_alumno);
+ALTER TABLE alumno ADD INDEX idx_Nombre (nombre_alumno);
+ALTER TABLE alumno ADD INDEX idx_DNI (dni);
+ALTER TABLE ejercicio ADD INDEX idx_Nombre (nombre);
+ALTER TABLE localidad ADD INDEX idx_Nombre (nombre_localidad);
+ALTER TABLE localidad ADD INDEX idx_CodPostal (codigo_postal);
