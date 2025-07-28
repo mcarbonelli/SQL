@@ -9,3 +9,8 @@ Convenciones
 ------------
 •	Los nombres de los índices comienzan por idx_ y luego una palabra descriptiva del campo indexado
 •	Para las claves foráneas, los nombres son: fk_ segido de las 2 tablas involucradas, separadas por _ Por ejemplo: fk_rutina_alumno_ejercicio hace referencia a una FK entre la tabla rutina_alumno y ejercicio
+
+
+Detalle de Tablas
+------------------
+En el detalle de tablas, hay campos que sus nombres son autodescriptivos, por lo que no veo necesario agregar información adicional en la columna Descripción. Por ejemplo: nombre_alumno
