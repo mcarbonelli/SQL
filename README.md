@@ -19,7 +19,7 @@ Detalle de Tablas
 ------------------
 En el detalle de tablas, hay campos que sus nombres son autodescriptivos, por lo que no veo necesario agregar información adicional en la columna Descripción. Por ejemplo: nombre_alumno
 
-Archvios de Entrea 2
---------------------
+Archivos de Entrega 2
+---------------------
 El PDF tiene todo el contenido de la entrega 1 más los temas de la consigna para la entrega 2.
 Los scripts están separados en 2 (uno que tiene solamente las inserciones, y otro que tiene solamente la creación de las vistas, funciones y procedimientos almacenados, y triggers) más un script complet el cual incluye todo lo de la entrga 1 más el contenido de estos 2 scripts nuevos.
